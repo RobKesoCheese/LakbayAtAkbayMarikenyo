@@ -1,0 +1,423 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "Georgia", serif;
+  line-height: 1.5;
+  background-color: #2E2E2E;
+  color: #F3F3E6;
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+}
+
+/* ===== Hide Scrollbar ===== */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.navbar .logo {
+  background-color: transparent;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  color: #F3F3E6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.navbar a:hover {
+  opacity: 0.8;
+}
+
+/* ===== Dropdown Styles ===== */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none !important;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  list-style: none;
+  padding: 10px 0;
+  margin: 0;
+  border-radius: 8px;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 15px;
+  color: #F3F3E6;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #444;
+  color: #F1E2AD;
+}
+
+/* Show on hover (desktop only) */
+.dropdown:hover .dropdown-menu {
+  display: block !important;
+}
+
+/* ===== Logo ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  max-width: fit-content;
+}
+
+.logo-icon {
+  height: 60px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+
+/* ===== Hamburger ===== */
+.hamburger {
+  display: none;
+  font-size: 30px;
+  background: none;
+  border: none;
+  color: #F3F3E6;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.hamburger:active {
+  transform: scale(0.95);
+}
+
+/* ===== Villages Section ===== */
+.villages {
+  padding: 120px 20px 50px; /* space for fixed navbar */
+}
+
+.district {
+  margin-bottom: 60px;
+}
+
+.district h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: #F1E2AD;
+  text-align: center;
+}
+
+/* Barangay Cards Grid (default desktop) */
+.barangay-grid {
+  display: grid;
+  gap: 20px;
+  justify-content: center;
+}
+
+.barangay-card {
+  position: relative;
+  width: 220px;
+  background: #1D1912;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  flex: 0 0 auto; /* important for mobile scrolling */
+}
+
+.barangay-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  border-radius: 6px;
+}
+
+.barangay-card .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  color: #F3F3E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.barangay-card p {
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.barangay-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+}
+.barangay-card:hover img {
+  transform: scale(1.1);
+}
+.barangay-card:hover .overlay {
+  opacity: 1;
+}
+
+/* Desktop grid layout */
+.district:nth-of-type(1) .barangay-grid {
+  grid-template-columns: repeat(5, 220px);
+}
+.district:nth-of-type(2) .barangay-grid {
+  grid-template-columns: repeat(4, 220px);
+}
+
+/* ===== Responsive Sections ===== */
+
+/* Tablet and small desktops */
+@media screen and (max-width: 1024px) {
+  .about-img img {
+    width: 250px;
+  }
+  .about {
+    padding: 50px 8%;
+  }
+
+  /* Map + info box */
+  #map-info-container {
+    flex-direction: column; /* stack on smaller desktops */
+    align-items: center;
+  }
+  #gmap, #info-box {
+    width: 100%;
+    max-width: 100%;
+    min-height: 300px;
+  }
+}
+
+/* Tablets and large phones */
+@media screen and (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    padding: 40px 5%;
+  }
+  .about-text, .legacy-text {
+    width: 100%;
+    padding-right: 0;
+  }
+  .about-img {
+    justify-content: flex-start;
+  }
+  .about-img img {
+    width: 200px;
+  }
+
+  /* Navbar */
+  .hamburger {
+    display: block;
+  }
+  .nav-menu {
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    flex-direction: column;
+    padding: 15px 0;
+  }
+  .nav-menu.show {
+    display: flex;
+  }
+  .nav-menu ul {
+    flex-direction: column;
+    gap: 0;
+  }
+  .nav-menu ul li {
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  /* Dropdown inside nav */
+  .dropdown-menu {
+    position: static;
+    background: none;
+    border: none;
+  }
+  .dropdown-menu li a {
+    padding: 10px 0;
+  }
+
+  /* Coffee menu bar */
+  .cfmenu {
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .coffee-menu {
+    gap: 15px;
+    font-size: 0.9rem;
+  }
+
+  /* Map + info box */
+  #map-info-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  #gmap, #info-box {
+    width: 100%;
+    min-height: 300px;
+  }
+
+  .coffee-spot {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .coffee-img img {
+    margin-top: 20px;
+  }
+
+   .district .barangay-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    scroll-snap-type: x mandatory;
+  }
+
+  .district .barangay-grid::before,
+  .district .barangay-grid::after {
+    content: "";
+    flex: 0 0 12px; /* adds space left & right */
+  }
+  
+  .district .barangay-card {
+    flex: 0 0 220px;
+    width: 220px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .district .barangay-grid::-webkit-scrollbar {
+    height: 8px;
+  }
+  .district .barangay-grid::-webkit-scrollbar-thumb {
+    background: #F1E2AD;
+    border-radius: 6px;
+  }
+  .district .barangay-grid::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* Small phones */
+@media screen and (max-width: 480px) {
+  .about-img img {
+    width: 80%;
+  }
+  .about-img {
+    justify-content: center;
+    margin: 25px 0;
+  }
+
+  /* Front section */
+  .front .overlay {
+    padding: 120px 15px;
+  }
+  .front h1 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+  }
+  .front .description {
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+  }
+  .btndiscover, .btnexplore {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .about, .legacy {
+    padding: 25px 12px;
+  }
+  .navbar {
+    padding: 12px 15px;
+  }
+  .logo-icon {
+    height: 45px;
+  }
+  #marikina {
+    padding: 0 5%;
+  }
+
+  /* Coffee menu smaller buttons */
+  .coffee-menu li a {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+}
+
+/* Extra small devices */
+@media screen and (max-width: 360px) {
+  .front h1, .heartshoe h1 {
+    font-size: 1.6rem;
+  }
+  .btndiscover, .btnexplore {
+    padding: 8px 14px;
+  }
+  .coffee-menu {
+    gap: 10px;
+  }
+}

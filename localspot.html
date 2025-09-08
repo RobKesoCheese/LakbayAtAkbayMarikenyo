@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Lakbay Marikenyo</title>
+      <link rel="stylesheet" href="local.css" />
+    </head>
+    <body>
+      <header class="navbar" id="navbar">
+  <div class="logo">
+    <a href="index.html">
+      <img src="logo/logo.png" alt="Lakbay Logo" class="logo-icon" />
+    </a>
+  </div>
+
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+
+  <nav class="nav-menu" id="nav-menu">
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+
+      <!-- Dropdown About -->
+      <li class="dropdown">
+        <a href="#">ABOUT ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="index.html#info">History of Marikina</a></li>
+          <li><a href="index.html#marikina">Shoe Capital</a></li>
+          <li><a href="localspot.html">Local Spots</a></li>
+        </ul>
+      </li>
+
+      <li><a href="village.html">BARANGAY</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="coffees">  
+    <div class="cfes">
+      <h1>LOCAL FOOD SPOTS WITHIN MARIKINA</h1>
+      <h3>Taste the local cuisines of Marikina City</h3>
+    </div>
+  </section>
+
+  <!-- Coffee Spot -->
+   <div class="cfmenu">
+<ul class="coffee-menu">
+  <li><a href="#" onclick="changeMap('Beanhi')">Beanhi</a></li>
+  <li><a href="#" onclick="changeMap('Bread')">Bread Head Cafe</a></li>
+  <li><a href="#" onclick="changeMap('Dogud')">Do Güd Cafe</a></li>
+  <li><a href="#" onclick="changeMap('Matcha')">Matcha Place</a></li>
+  <li><a href="#" onclick="changeMap('Cocol')">Cocol Coffee & Tea</a></li>
+  <li><a href="#" onclick="changeMap('Duplex')">DupleXpresso</a></li>
+  <li><a href="#" onclick="changeMap('Benito')">Kape Benito Community Cafe</a></li>
+  <li><a href="#" onclick="changeMap('Mama')">Mama Chits Coffee House</a></li>
+  <li><a href="#" onclick="changeMap('1975')">1975 Old-Fashioned Burgers</a></li>
+  <li><a href="#" onclick="changeMap('Sally')">Sally's Gotohan</a></li>
+</ul>
+</div>
+
+<!-- Google Map + Info Box Container -->
+<div id="map-info-container">
+
+  <!-- Info Box (right side) -->
+  <div id="info-box">
+    <h2>Select a Coffee Spot</h2>
+    <p>Click on a place from the menu above to see details here.</p>
+  </div>
+
+  <!-- Map Wrapper -->
+  <div id="map-container">
+    <iframe
+      id="gmap"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61762.556479964376!2d121.06342404823145!3d14.64686987612136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b9a2777a00f9%3A0x6d36c8f429a12fc6!2sMarikina%2C%20Metro%20Manila!5e0!3m2!1sen!2sph!4v1757325836118!5m2!1sen!2sph"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+        <script src="local.js" ></script>
+            
+    </body>
+
+  </html>
