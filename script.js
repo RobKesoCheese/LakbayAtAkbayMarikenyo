@@ -5,7 +5,6 @@ function toggleMenu() {
   document.getElementById("nav-menu").classList.toggle("show");
 }
 
-// Navbar scroll effect
 const header = document.getElementById("navbar");
 window.addEventListener("scroll", () => {
   if (window.scrollY > 0) {
@@ -15,7 +14,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Close menu when clicking a link (Mobile UX)
 document.querySelectorAll('.nav-menu a').forEach(link => {
   link.addEventListener('click', () => {
     const navMenu = document.getElementById('nav-menu');
@@ -24,6 +22,19 @@ document.querySelectorAll('.nav-menu a').forEach(link => {
     }
   });
 });
+
+// Mobile Dropdown Toggle
+const dropdownLink = document.querySelector('.dropdown > a');
+const dropdownMenu = document.querySelector('.dropdown-menu');
+
+if (dropdownLink && dropdownMenu) {
+  dropdownLink.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault(); 
+      dropdownMenu.classList.toggle('show-mobile');
+    }
+  });
+}
 
 // ==========================
 // 2. HOME PAGE SLIDESHOW
@@ -37,24 +48,30 @@ if (slideshow) {
     current = (current + 1) % slides.length;
     slideshow.style.transform = `translateX(-${current * 100}%)`;
   }
-
-  // Auto slide every 5s
   setInterval(slideNext, 5000);
 }
 
 // ==========================
 // 3. LOCAL SPOTS MAP LOGIC
 // ==========================
-function changeMap(place) {
+function changeMap(place, element) {
   const mapFrame = document.getElementById("gmap");
   const infoBox = document.getElementById("info-box");
 
-  // Safety check: If we aren't on the map page, stop here.
   if (!mapFrame || !infoBox) return;
+
+  // Highlight Active Button
+  const allLinks = document.querySelectorAll('.coffee-menu li a');
+  allLinks.forEach(link => link.classList.remove('active-spot'));
+
+  if (element) {
+    element.classList.add('active-spot');
+  }
 
   let mapSrc = "";
   let info = "";
 
+  // Define Data
   if (place === "Beanhi") {
     mapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463.0772792907933!2d121.09342369368531!3d14.621809703344411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397b937e7e85f8d%3A0x428845390fc59fc8!2sBeanhi%20Coffee%20House!5e0!3m2!1sen!2sph!4v1757325016872!5m2!1sen!2sph";
     info = `
@@ -76,7 +93,7 @@ function changeMap(place) {
     info = `
       <h2>Do Güd Cafe</h2>
       <img src="foodspot/dugud.jpg" alt="Do Güd Cafe" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px; margin-bottom: 20px;">
-      <p><strong>Address:</strong> 9 E. Rodriguez St, Corner Lakandula, Marikina, 1708 Metro Manila</p>
+      <p><strong>Address:</strong> 9 E. Rodriguez St, Corner Lakandula, Marikina</p>
       <p><strong>Price Range:</strong> ₱105 - ₱200+</p>
     `;
   } else if (place === "Matcha") {
@@ -84,7 +101,7 @@ function changeMap(place) {
     info = `
       <h2>Matcha Place</h2>
       <img src="foodspot/matchap.jpg" alt="Matcha Place" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px; margin-bottom: 20px;">
-      <p><strong>Address:</strong> 31 C.M. Recto St, Marikina, 1800 Metro Manila</p>
+      <p><strong>Address:</strong> 31 C.M. Recto St, Marikina</p>
       <p><strong>Price Range:</strong> ₱49 - ₱69+</p>
     `;
   } else if (place === "Cocol") {
@@ -92,7 +109,7 @@ function changeMap(place) {
     info = `
       <h2>Cocol Coffee & Tea</h2>
       <img src="foodspot/cocol.png" alt="Cocol Coffee & Tea" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px; margin-bottom: 20px;">
-      <p><strong>Address:</strong> 18 Parnaso Street, Corner P. Paterno St, Marikina, 1809 Metro Manila</p>
+      <p><strong>Address:</strong> 18 Parnaso Street, Corner P. Paterno St, Marikina</p>
       <p><strong>Price Range:</strong> ₱100 - ₱200+</p>
     `;
   } else if (place === "Duplex") {
@@ -100,7 +117,7 @@ function changeMap(place) {
     info = `
       <h2>DupleXpresso</h2>
       <img src="foodspot/duplex.jpg" alt="DupleXpresso" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px">
-      <p><strong>Address:</strong> 14 E Rodriguez, Marikina, Metro Manila</p>
+      <p><strong>Address:</strong> 14 E Rodriguez, Marikina</p>
       <p><strong>Price Range:</strong> ₱90-200+</p>
     `;
   } else if (place === "Benito") {
@@ -108,7 +125,7 @@ function changeMap(place) {
     info = `
       <h2>Kape Benito Community Cafe</h2>
       <img src="foodspot/benito.jpg" alt="Kape Benito Community Cafe" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px">
-      <p><strong>Address:</strong> 48 Sparrow, Marikina, Metro Manila</p>
+      <p><strong>Address:</strong> 48 Sparrow, Marikina</p>
       <p><strong>Price Range:</strong> ₱200-400+</p>
     `;
   } else if (place === "Mama") {
@@ -116,7 +133,7 @@ function changeMap(place) {
     info = `
       <h2>Mama Chits Coffee House</h2>
       <img src="foodspot/mama.jpg" alt="Mama Chits Coffee House" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px">
-      <p><strong>Address:</strong> 278 J. P. Rizal St, Marikina, Metro Manila</p>
+      <p><strong>Address:</strong> 278 J. P. Rizal St, Marikina</p>
       <p><strong>Price Range:</strong> ₱100-200+</p>
     `;
   } else if (place === "1975") {
@@ -124,7 +141,7 @@ function changeMap(place) {
     info = `
       <h2>1975 Old-Fashioned Burgers</h2>
       <img src="foodspot/1975.jpg" alt="1975 Old-Fashioned Burgers" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px">
-      <p><strong>Address:</strong> 26, Yamson, Marikina, Metro Manila</p>
+      <p><strong>Address:</strong> 26, Yamson, Marikina</p>
       <p><strong>Price Range:</strong> ₱200-400+</p>
     `;
   } else if (place === "Sally") {
@@ -132,65 +149,62 @@ function changeMap(place) {
     info = `
       <h2>Sally's Gotohan</h2>
       <img src="foodspot/sally.jpg" alt="Sally's Gotohan" style="width: 100%; height: 100%; max-height: 480px; border-radius: 10px">
-      <p><strong>Address:</strong> 27 Diego Silang, Marikina, Metro Manila</p>
+      <p><strong>Address:</strong> 27 Diego Silang, Marikina</p>
       <p><strong>Price Range:</strong> ₱100-200+</p>
     `;
   }
 
+  // Update DOM & Trigger Animation
   mapFrame.src = mapSrc;
   infoBox.innerHTML = info;
+
+  infoBox.classList.remove("fade-in-content");
+  void infoBox.offsetWidth; 
+  infoBox.classList.add("fade-in-content");
+
+  // Mobile Auto-Scroll
+  if (window.innerWidth <= 768) {
+    document.getElementById("map-info-container").scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'start' 
+    });
+  }
 }
+
+// Automatically select first item on load
+document.addEventListener("DOMContentLoaded", () => {
+  const firstLink = document.querySelector('.coffee-menu li a');
+  if (firstLink) {
+    firstLink.click(); 
+  }
+});
 
 // ==========================
 // 4. SCROLL ANIMATION OBSERVER
 // ==========================
 const observerOptions = {
-  root: null,        // viewport
-  threshold: 0.15,   // Trigger when 15% of the element is visible
-  rootMargin: "0px"  // No margin offsets
+  root: null,
+  threshold: 0.15,
+  rootMargin: "0px"
 };
 
-const observer = new IntersectionObserver((entries, observer) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Add the class that triggers the CSS transition
       entry.target.classList.add('show');
-      
-      // Optional: Stop observing once it has animated (runs only once)
-      // observer.unobserve(entry.target); 
     } else {
-      // Optional: Remove this 'else' block if you want the animation 
-      // to happen only ONCE. Keep it if you want it to re-animate 
-      // every time you scroll up and down.
       entry.target.classList.remove('show');
     }
   });
 }, observerOptions);
 
-// Select all elements with the class "place" and start observing them
 document.querySelectorAll('.place').forEach((el) => {
   observer.observe(el);
 });
 
-// Back to Top Button Visibility
-const backToTopBtn = document.getElementById("backToTop");
-
-if (backToTopBtn) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) { // Show after scrolling down 300px
-      backToTopBtn.style.opacity = "1";
-      backToTopBtn.style.pointerEvents = "auto";
-    } else {
-      backToTopBtn.style.opacity = "0";
-      backToTopBtn.style.pointerEvents = "none";
-    }
-  });
-}
-
 // ==========================
 // 5. BARANGAY MODAL LOGIC
 // ==========================
-
 const barangayModal = document.getElementById("barangayModal");
 const closeButton = document.querySelector(".modal .close-button");
 const modalTitle = document.getElementById("modalTitle");
@@ -198,51 +212,43 @@ const modalImage = document.getElementById("modalImage");
 const modalDescription = document.getElementById("modalDescription");
 const modalMapLink = document.getElementById("modalMapLink");
 
-// Function to open the modal
 function openBarangayModal(title, imageSrc, description, mapLink) {
   modalTitle.textContent = title;
   modalImage.src = imageSrc;
-  modalImage.alt = title; // Set alt text for accessibility
+  modalImage.alt = title;
   modalDescription.textContent = description;
   modalMapLink.href = mapLink;
   barangayModal.style.display = "block";
-  document.body.style.overflow = "hidden"; // Prevent scrolling the background
+  document.body.style.overflow = "hidden";
 }
 
-// Function to close the modal
 function closeBarangayModal() {
   barangayModal.style.display = "none";
-  document.body.style.overflow = ""; // Re-enable background scrolling
+  document.body.style.overflow = "";
 }
 
-// Event Listeners for opening the modal
 document.querySelectorAll(".open-barangay-modal").forEach(card => {
   card.addEventListener("click", function(event) {
-    event.preventDefault(); // Prevent the default link behavior
-    
-    // Get data from the clicked card
-    const title = this.dataset.title;
-    const image = this.dataset.image;
-    const description = this.dataset.description;
-    const map = this.dataset.mapLink;
-
-    openBarangayModal(title, image, description, map);
+    event.preventDefault();
+    openBarangayModal(
+      this.dataset.title,
+      this.dataset.image,
+      this.dataset.description,
+      this.dataset.mapLink
+    );
   });
 });
 
-// Event Listeners for closing the modal
-if (closeButton) { // Ensure button exists before adding listener
+if (closeButton) {
   closeButton.addEventListener("click", closeBarangayModal);
 }
 
-// Close when clicking outside the modal content
 window.addEventListener("click", function(event) {
   if (event.target == barangayModal) {
     closeBarangayModal();
   }
 });
 
-// Close when pressing the Escape key
 document.addEventListener("keydown", function(event) {
   if (event.key === "Escape" && barangayModal.style.display === "block") {
     closeBarangayModal();
@@ -250,23 +256,69 @@ document.addEventListener("keydown", function(event) {
 });
 
 // ==========================
-// 6. MOBILE DROPDOWN TOGGLE
+// 6. BACK TO TOP & PROGRESS BAR
 // ==========================
-// Select the "About" link inside the dropdown list item
-const dropdownLink = document.querySelector('.dropdown > a');
-const dropdownMenu = document.querySelector('.dropdown-menu');
+const backToTopBtn = document.getElementById("backToTop");
 
-if (dropdownLink && dropdownMenu) {
-  dropdownLink.addEventListener('click', (e) => {
-    // Check if we are on a mobile screen (width <= 768px)
-    if (window.innerWidth <= 768) {
-      e.preventDefault(); // Stop the page from jumping to the top
-      
-      // Toggle the class that shows/hides the menu
-      dropdownMenu.classList.toggle('show-mobile');
-      
-      // Optional: Rotate the little arrow if you want visual feedback
-      // dropdownLink.textContent = dropdownMenu.classList.contains('show-mobile') ? "ABOUT ▴" : "ABOUT ▾";
+if (backToTopBtn) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.opacity = "1";
+      backToTopBtn.style.pointerEvents = "auto";
+    } else {
+      backToTopBtn.style.opacity = "0";
+      backToTopBtn.style.pointerEvents = "none";
     }
   });
+
+  backToTopBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 }
+
+// Scroll Progress Bar
+function updateProgressBar() {
+  const scrollProgress = document.getElementById("scroll-progress");
+  if (scrollProgress) {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
+    if (scrollHeight <= 0) {
+      scrollProgress.style.width = "0%";
+      return;
+    }
+
+    const scrolled = (scrollTop / scrollHeight) * 100;
+    scrollProgress.style.width = scrolled + "%";
+  }
+}
+
+window.addEventListener("scroll", updateProgressBar);
+window.addEventListener("load", updateProgressBar);
+
+// ==========================
+// 7. ACTIVE LINK HIGHLIGHTER
+// ==========================
+const currentPage = window.location.pathname.split("/").pop();
+const navLinks = document.querySelectorAll('.navbar a');
+
+navLinks.forEach(link => {
+  const linkPage = link.getAttribute('href');
+  if (linkPage === currentPage || (currentPage === "" && linkPage === "index.html")) {
+    link.classList.add('active');
+  }
+});
+
+// ==========================
+// 8. PRELOADER
+// ==========================
+window.addEventListener("load", () => {
+  const preloader = document.getElementById("preloader");
+  if (preloader) {
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  }
+});
