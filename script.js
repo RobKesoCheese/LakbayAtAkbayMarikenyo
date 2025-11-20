@@ -14,8 +14,14 @@ window.addEventListener("scroll", () => {
   }
 });
 
+// Close menu when clicking a link (Mobile UX)
 document.querySelectorAll('.nav-menu a').forEach(link => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', (e) => {
+    // FIX: If the clicked link is the "About" dropdown, DO NOT close the menu
+    if (link.parentElement.classList.contains('dropdown')) {
+      return; 
+    }
+
     const navMenu = document.getElementById('nav-menu');
     if (navMenu.classList.contains('show')) {
       navMenu.classList.remove('show');
