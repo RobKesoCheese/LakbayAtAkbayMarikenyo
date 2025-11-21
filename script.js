@@ -264,25 +264,6 @@ document.addEventListener("keydown", function(event) {
 // ==========================
 // 6. BACK TO TOP & PROGRESS BAR
 // ==========================
-const backToTopBtn = document.getElementById("backToTop");
-
-if (backToTopBtn) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-      backToTopBtn.style.opacity = "1";
-      backToTopBtn.style.pointerEvents = "auto";
-    } else {
-      backToTopBtn.style.opacity = "0";
-      backToTopBtn.style.pointerEvents = "none";
-    }
-  });
-
-  backToTopBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
 // Scroll Progress Bar
 function updateProgressBar() {
   const scrollProgress = document.getElementById("scroll-progress");
@@ -327,4 +308,5 @@ window.addEventListener("load", () => {
       preloader.style.display = "none";
     }, 500);
   }
+
 });
