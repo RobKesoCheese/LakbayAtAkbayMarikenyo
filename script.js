@@ -262,29 +262,6 @@ document.addEventListener("keydown", function(event) {
 });
 
 // ==========================
-// 6. BACK TO TOP & PROGRESS BAR
-// ==========================
-// Scroll Progress Bar
-function updateProgressBar() {
-  const scrollProgress = document.getElementById("scroll-progress");
-  if (scrollProgress) {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    
-    if (scrollHeight <= 0) {
-      scrollProgress.style.width = "0%";
-      return;
-    }
-
-    const scrolled = (scrollTop / scrollHeight) * 100;
-    scrollProgress.style.width = scrolled + "%";
-  }
-}
-
-window.addEventListener("scroll", updateProgressBar);
-window.addEventListener("load", updateProgressBar);
-
-// ==========================
 // 7. ACTIVE LINK HIGHLIGHTER
 // ==========================
 const currentPage = window.location.pathname.split("/").pop();
@@ -308,5 +285,4 @@ window.addEventListener("load", () => {
       preloader.style.display = "none";
     }, 500);
   }
-
 });
